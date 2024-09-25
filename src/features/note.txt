@@ -1,0 +1,30 @@
+https://github.com/leonibr/vue-3-typescript-template/tree/main/src/views/theme
+
+================
+Features Folder
+================
+
+1. api: All the fetch logic goes here. This decouples the API and the UI.
+2. components: Feature specific components.
+3. composables: Feature specific composables.
+4. stores: The state management code. Multiple sub-modules are expected and actually encouraged.
+5. types: Feature specific typeScript type definitions.
+6. index.ts: This is the entry point of the feature. It behaves as the public API of the feature, and it should only export things that should be public for other parts of the application.
+
+***
+The aboveindex.ts file serves as the public API of each feature. When importing something from another domain it should be done only through this file. This should prevent circular dependencies, and also make it easier to find the source of an import.
+***
+
+
+=========
+Provider/Inject for core only 
+=========
+- When using provide/inject you avoid the import statement and the function call, 
+  reducing the boilerplate to a single line 
+  const nameStore = inject('nameStore'), 
+  the drawbacks are the usual ones that come with provide/inject:
+- It leads to tight coupling between your components, 
+making them less reusable in other contexts. However, if you inject your store at the root component of your app, this won't matter much.
+- There is no compile-time safety: If the store was not provided correctly, 
+  your inject call will return undefined, which will only be found out during runtime.
+
